@@ -90,6 +90,13 @@ function start() {
   header.style.display = 'none';
   guide.style.display = 'none';
   if (i<31){
+    if (i==0){
+      input_time("練習タスクが始まる");
+    } else if (i==30){
+      save.style.display="none";
+    } else {
+      input_time("続く");
+    }
     alert("パンフレットの内容ではなく折り方によって得られるUXを直観的に入力してください")
     envelope_number.innerHTML = i;
     top_page.style.display ='none';
@@ -107,7 +114,8 @@ function start() {
   function resume(){
     if (i<31){
       guide.style.display = "block";
-      cont.onclick = input_time("続く");
+      rest.style.display = "none";
+      cont.onclick = input_time("休憩終了");
     } else {
       thank.style.display = "block";
     }
@@ -189,7 +197,7 @@ function focus_reason(e){
             }
         if (y==0 && z==0){
           save_file();
-          input_time("休憩");
+          input_time("休憩開始");
           i++;
           hide_screen();
           // rest.style.display="inline-block";
@@ -205,7 +213,6 @@ function focus_reason(e){
     var y = 0;
     var output = document.getElementsByClassName("cq");
     for (x = 0; x<output.length; x++){
-      console.log(output[x].value)
       if (output[x].value=='未'){
         y++;
       }}
@@ -289,6 +296,7 @@ function save_condition(){
       } else {
         all_eval.style.display="none";
         condition.style.display="block";
+        input_time("実験後アンケートが始まる");
       }
     }
 
@@ -345,8 +353,11 @@ function close_file(){
 
     // 3 VALUE INI MUSTI DIUBAH SESUAI INSTRUKSI
     // for github
-    var CLIENT_ID = "514380287820-tbhleigkv9mandjaqgrm3i5065e6g4ks.apps.googleusercontent.com";
-    var API_KEY = "AIzaSyD1pa1gCIkPbBFSl8FPalMC0C3GSv5ks-k";
+    // var CLIENT_ID = "514380287820-tbhleigkv9mandjaqgrm3i5065e6g4ks.apps.googleusercontent.com";
+    // var API_KEY = "AIzaSyD1pa1gCIkPbBFSl8FPalMC0C3GSv5ks-k";
+
+    var CLIENT_ID = "514380287820-vcdcub63jhtma7uis4s0ua4ifpfnnglm.apps.googleusercontent.com";
+    var API_KEY = "AIzaSyCECtMWWF1h9a7q9cJdqS9AW-wEA0d5GXE";
     var spreadsheetId = ss_id;
 
     // INI BUAT SHOW/HIDE TOMBOL2, KALO display=none ITU DI HIDE, KALO display=inline-block ITU DI SHOW

@@ -353,11 +353,10 @@ function close_file(){
 
     // 3 VALUE INI MUSTI DIUBAH SESUAI INSTRUKSI
     // for github
-    // var CLIENT_ID = "514380287820-tbhleigkv9mandjaqgrm3i5065e6g4ks.apps.googleusercontent.com";
-    // var API_KEY = "AIzaSyD1pa1gCIkPbBFSl8FPalMC0C3GSv5ks-k";
+    var CLIENT_ID = "514380287820-tbhleigkv9mandjaqgrm3i5065e6g4ks.apps.googleusercontent.com";
+    var API_KEY = "AIzaSyD1pa1gCIkPbBFSl8FPalMC0C3GSv5ks-k";
 
-    var CLIENT_ID = "514380287820-vcdcub63jhtma7uis4s0ua4ifpfnnglm.apps.googleusercontent.com";
-    var API_KEY = "AIzaSyCECtMWWF1h9a7q9cJdqS9AW-wEA0d5GXE";
+
     var spreadsheetId = ss_id;
 
     // INI BUAT SHOW/HIDE TOMBOL2, KALO display=none ITU DI HIDE, KALO display=inline-block ITU DI SHOW

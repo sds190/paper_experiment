@@ -249,7 +249,7 @@
       </div>
 </div>
 
-    <div class="buttons">
+  <div class="buttons" id="buttons">
     <button id="next" type="button" onclick="check()" class="next">次へ</button>
     <br>
     <button id="save" type="button" onclick="check2()" class="save">休憩</button>
@@ -260,6 +260,43 @@
     <h1 class="title">紙の折り方によって与えられるユーザーエクスペリエンスを調べるための実験</h1>
     <button id="continue" class="continue" type="button" onclick="resume()">実験を続く</button>
   </div>
+
+  <div id="condition" class="condition">
+    <h1 class="title">実験後アンケート</h1>
+    <div class="outputs con_quest">
+      <output  id="con_quest1_disp" class="cq">未</output><br>
+      <output  id="con_quest2_disp" class="cq">未</output><br>
+      <output  id="con_quest3_disp" class="cq">未</output><br>
+      <output  id="con_quest4_disp" class="cq">未</output><br>
+      <output  id="con_quest5_disp" class="cq">未</output><br>
+    </div>
+
+    <form class="con_quest">
+      <h3>実験に対するモチベーション</h3>
+      <label　for="con_quest1">低い　　　＜ー＞　　　高い</label>
+      <br><input type="range" id="con_quest1" name="con_quest1" min="-3" max="3" value="0" class="slider" oninput="con_quest1_disp.value = con_quest1.value">
+
+      <h3>実験中のリラックス度合い</h3>
+      <label for="con_quest2">　　緊張　　　 ＜ー＞　　リラックス</label>
+      <br><input type="range" id="con_quest2" name="con_quest2" min="-3" max="3" value="0" class="slider" oninput="con_quest2_disp.value = con_quest2.value">
+
+      <h3>心理的ストレス</h3>
+      <label for="con_quest3">低い　　　＜ー＞　　　高い</label>
+      <br><input type="range" id="con_quest3" name="con_quest3" min="-3" max="3" value="0" class="slider" oninput="con_quest3_disp.value = con_quest3.value">
+
+      <h3>身体的疲労</h3>
+      <label for="con_quest4">低い　　　＜ー＞　　　高い</label>
+      <br><input type="range" id="con_quest4" name="con_quest4" min="-3" max="3" value="0" class="slider" oninput="con_quest4_disp.value = con_quest4.value">
+
+      <h3>実験に対する集中の度合い</h3>
+      <label for="con_quest5">低い　　　＜ー＞　　　高い</label>
+      <br><input type="range" id="con_quest5" name="con_quest5" min="-3" max="3" value="0" class="slider" oninput="con_quest5_disp.value = con_quest5.value">
+
+    </form>
+    <br>
+    <button id="close" class="close" type="button" onclick="check3()">決定</button>
+  </div>
+
 
 <div class="thank" id="thank">
   <h3>実験に参加してくださり、<br>ありがとうございました。<br> お疲れ様でした。</h3>

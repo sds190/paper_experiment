@@ -26,6 +26,8 @@ const save = document.getElementById("save");
 const rest = document.getElementById("rest");
 const cont = document.getElementById("continue");
 const last_eval = document.getElementById("last_eval");
+const buttons = document.getElementById("buttons");
+const condition = document.getElementById("condition");
 const thank = document.getElementById("thank");
 const all_output = document.body.querySelectorAll("output");
 const attr01 = document.getElementById("attr01");
@@ -48,7 +50,7 @@ colorr.addEventListener("keydown", function(event){
   }
 })
 
-  function check_id(){
+function check_id(){
     var ss_id = document.getElementById("ss_id").value;
     if (ss_id == ""){
       alert("IDを入力してください");
@@ -105,7 +107,7 @@ function start() {
   function resume(){
     if (i<31){
       guide.style.display = "block";
-      cont.onclick = next_envelope()
+      cont.onclick = input_time("続く");
     } else {
       thank.style.display = "block";
     }
@@ -147,12 +149,11 @@ function focus_reason(e){
 
 
   function check(){
-      var output = document.getElementsByTagName("output");
+      var output = document.getElementsByClassName("num_output");
       var color_name = document.getElementById("color");
       var color_reason = document.getElementById("colorr");
       var y=0;
       var z=0;
-      console.log(output)
       for (x = 0; x<output.length; x++){
         if (output[x].value=='未'){
           y++;
@@ -174,7 +175,7 @@ function focus_reason(e){
     }}
 
   function check2(){
-        var output = document.getElementsByTagName("output");
+        var output = document.getElementsByClassName("num_output");
         var color_name = document.getElementById("color");
         var color_reason = document.getElementById("colorr");
         var y=0;
@@ -188,9 +189,10 @@ function focus_reason(e){
             }
         if (y==0 && z==0){
           save_file();
+          input_time("休憩");
           i++;
           hide_screen();
-          rest.style.display="inline-block";
+          // rest.style.display="inline-block";
         }  else {
           if(y>0){
             alert('タスク１に'+y+'個の答えていない項目があります');
@@ -198,6 +200,72 @@ function focus_reason(e){
           if (z>0){
             alert("タスク２を完成させてください");
           }}}
+
+  function check3(){
+    var y = 0;
+    var output = document.getElementsByClassName("cq");
+    for (x = 0; x<output.length; x++){
+      console.log(output[x].value)
+      if (output[x].value=='未'){
+        y++;
+      }}
+    if (y==0){
+        save_condition();
+        close_file();
+    }  else {
+        alert(y+'個の答えていない項目があります');
+    }}
+
+function save_condition(){
+    var output = document.getElementsByClassName("cq");
+    var data_array = [];
+    for (x = 0; x<output.length; x++){
+        data_array.push(output[x].value)
+      }
+    var body = {
+          values: [
+              data_array
+          ]
+      };
+    var id = document.getElementById("ss_id");
+    var spreadsheetId = id.value;
+    gapi.client.sheets.spreadsheets.values.append({
+        spreadsheetId: spreadsheetId,
+        range: "condition", // INI NAMA SHEET YG BIASA DI BAWAH (DEFAULTNYA Sheet1)
+        valueInputOption: 'RAW', // INI IKUTIN AJA
+        resource: body
+    }).then((response) => {
+        var result = response.result;
+        console.log(`${result.updates.updatedCells} cells appended.`)
+    });
+  }
+
+
+  function input_time(act){
+    var d = new Date();
+    var n = d.toLocaleTimeString();
+    var data_array = [act, n, i];
+    var body = {
+          values: [
+              data_array
+          ]
+      };
+      // INI BUAT NAMBAHIN DATA KE SHEET NYA
+    var id = document.getElementById("ss_id");
+    var spreadsheetId = id.value;
+    gapi.client.sheets.spreadsheets.values.append({
+        spreadsheetId: spreadsheetId,
+        range: 'rest_time', // INI NAMA SHEET YG BIASA DI BAWAH (DEFAULTNYA Sheet1)
+        valueInputOption: 'RAW', // INI IKUTIN AJA
+        resource: body
+    }).then((response) => {
+        var result = response.result;
+        console.log(`${result.updates.updatedCells} cells appended.`)
+    });
+    if (act == "続く") {
+      next_envelope();
+    }
+  }
 
   function next_envelope() {
       rest.style.display = "none";
@@ -215,13 +283,17 @@ function focus_reason(e){
           attr01.focus();
           openFullscreen();
         },500)
+        if (i==30){
+          save.style.display="none";
+        }
       } else {
-        thank.style.display="block";
+        all_eval.style.display="none";
+        condition.style.display="block";
       }
     }
 
   function save_file() {
-      var output = document.getElementsByTagName("output");
+      var output = document.getElementsByClassName("num_output");
       var color_name = document.getElementById("color");
       var color_reason = document.getElementById("colorr");
       var data_array = [i];
@@ -251,7 +323,7 @@ function focus_reason(e){
 
   function hide_screen() {
       all_eval.style.display="none";
-      cont.style.display="block";
+      rest.style.display="inline-block";
       finished_num = i-1;
       const left_num = 30 - finished_num;
       if (i<31){
@@ -266,10 +338,13 @@ function focus_reason(e){
 function close_file(){
     all_eval.style.display="none";
     last_eval.style.display="none";
+    condition.style.display="none";
+    buttons.style.display="none";
     thank.style.display="block";
   }
 
     // 3 VALUE INI MUSTI DIUBAH SESUAI INSTRUKSI
+    // for github
     var CLIENT_ID = "514380287820-tbhleigkv9mandjaqgrm3i5065e6g4ks.apps.googleusercontent.com";
     var API_KEY = "AIzaSyD1pa1gCIkPbBFSl8FPalMC0C3GSv5ks-k";
     var spreadsheetId = ss_id;

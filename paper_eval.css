@@ -11,6 +11,7 @@ body {
 div.guide,
 div.all_eval,
 div.rest,
+div.condition,
 div.thank{
   padding: 1rem;
   display: none;
@@ -257,6 +258,15 @@ img.step4{
 
 }
 
+div.condition,
+form.con_quest input{
+  margin-bottom: 2rem;
+}
+
+form.con_quest h3{
+  margin: 0;
+}
+
 @media only screen and (max-width: 500px){
   h1,
   h2,
@@ -388,4 +398,10 @@ img.step4{
     left: unset;
     top: calc(100rem + 110vw);
   }
+
+  div.condition div.outputs.con_quest {
+    top: 8rem;
+    line-height: 3rem;
+    left: 2rem;
+}
 }

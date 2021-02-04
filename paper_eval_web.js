@@ -90,8 +90,12 @@ function start() {
   header.style.display = 'none';
   guide.style.display = 'none';
   if (i<31){
+    eval.reset();
+    color_eval.reset();
     if (i==0){
       input_time("練習タスクが始まる");
+    } else if (i==1){
+      input_time("実験タスクが始まる");
     } else if (i==30){
       save.style.display="none";
     } else {
@@ -290,9 +294,11 @@ function save_condition(){
           attr01.focus();
           openFullscreen();
         },500)
-        if (i==30){
+        if (i==1){
+          input_time("実験タスクが始まる")
+        }　else if (i==30){
           save.style.display="none";
-        }
+        }　
       } else {
         all_eval.style.display="none";
         condition.style.display="block";
@@ -344,6 +350,7 @@ function save_condition(){
 
 
 function close_file(){
+    input_time("実験後アンケート終了");
     all_eval.style.display="none";
     last_eval.style.display="none";
     condition.style.display="none";
@@ -355,7 +362,6 @@ function close_file(){
     // for github
     var CLIENT_ID = "514380287820-tbhleigkv9mandjaqgrm3i5065e6g4ks.apps.googleusercontent.com";
     var API_KEY = "AIzaSyD1pa1gCIkPbBFSl8FPalMC0C3GSv5ks-k";
-
 
     var spreadsheetId = ss_id;
 
